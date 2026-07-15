@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class EnemyCollision : MonoBehaviour
+public class Teleport : MonoBehaviour
 {
+
+    public int enemyCount;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -14,13 +17,14 @@ public class EnemyCollision : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        enemyCount = GameObject.FindGameObjectsWithTag("Enemy").Length;
     }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Enemy")
+        if (collision.gameObject.tag == "Player" && enemyCount == 0)
         {
-            SceneManager.LoadScene("Level1");
+            SceneManager.LoadScene(1);
         }
     }
 }
